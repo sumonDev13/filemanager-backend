@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import passport = require('passport');
+import passport from 'passport';
 import { googleCallback } from '../controllers/auth.controller.js';
 
 const router = Router();

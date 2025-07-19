@@ -1,12 +1,15 @@
 import passport from 'passport';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import User,{IUser} from '../models/user.model.js';
+import * as dotenv from 'dotenv';
+dotenv.config();
+
 passport.use(
   new GoogleStrategy(
     {
       clientID: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-      callbackURL: '/api/auth/google/callback', // Full URL will be http://<your_domain>/api/auth/google/callback
+      callbackURL: 'http://localhost:5000/api/auth/google/callback', // Full URL will be http://<your_domain>/api/auth/google/callback
       proxy: true
     },
     async (accessToken, refreshToken, profile, done) => {
