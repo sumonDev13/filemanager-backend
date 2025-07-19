@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import File from '../models/file.model';
+import File from '../models/file.model.js';
 
 // Note: 'req.user' will be populated by your authentication middleware
 // Note: 'req.file' will be populated by Multer middleware

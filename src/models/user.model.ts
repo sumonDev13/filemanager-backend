@@ -1,7 +1,7 @@
 import {Schema , model, Document} from 'mongoose';
 
 export interface IUser extends Document {
-  googleId: string;
+  googleId: string ;
   displayName: string;
   email: string;
   avatar: string;
