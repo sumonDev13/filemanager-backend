@@ -16,7 +16,6 @@ export const isAuthenticated = async (req: Request, res: Response, next: NextFun
 
   if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
     try {
-      // Get token from header
       token = req.headers.authorization.split(' ')[1];
 
       // Verify token

@@ -4,13 +4,11 @@ import mongoose from 'mongoose';
 import * as dotenv from 'dotenv';
 import passport from 'passport';
 
-// Load environment variables
 dotenv.config();
 
 // Import configurations and routes
 import connectDB from './config/db.js';
-import './config/passport'; // Important: This line executes the passport config
-// import authRoutes from './routes/auth.routes';
+import './config/passport';
 import router from './routes/auth.routes.js';
 
 
@@ -25,13 +23,11 @@ app.use(cors({
   credentials: true,
 }));
 
-app.use(express.json()); // To parse JSON bodies
-app.use(passport.initialize()); // Initialize Passport
+app.use(express.json()); 
+app.use(passport.initialize());
 
 // API Routes
 app.use('/api/auth', router);
-// app.use('/api/files', fileRoutes);
-// app.use('/api/folders', folderRoutes);
 
 app.get('/test/auth/callback', (req, res) => {
   const token = req.query.token;
