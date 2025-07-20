@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import passport from 'passport';
-import { googleCallback } from '../controllers/auth.controller.js';
+import { getCurrentUser, googleCallback, logout } from '../controllers/auth.controller.js';
+import { isAuthenticated } from '../middleware/auth.middleware.js';
 
 const router = Router();
 
@@ -15,5 +16,10 @@ router.get(
   passport.authenticate('google', { failureRedirect: '/login', session: false }),
   googleCallback
 );
+
+router.get('/me', isAuthenticated, getCurrentUser);
+
+// Logout (for JWT, this is client-side but we can have an endpoint to clear cookies if using them)
+router.post('/logout',logout);
 
 export default router;
