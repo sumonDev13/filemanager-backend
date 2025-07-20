@@ -7,7 +7,7 @@ const router = Router();
 
 // @desc    Auth with Google
 // @route   GET /api/auth/google
-router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'], session: false }));
+router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'], session: false , prompt: 'select_account'}));
 
 // @desc    Google auth callback
 // @route   GET /api/auth/google/callback
