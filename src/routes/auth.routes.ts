@@ -18,8 +18,6 @@ router.get(
 );
 
 router.get('/me', isAuthenticated, getCurrentUser);
-
-// Logout (for JWT, this is client-side but we can have an endpoint to clear cookies if using them)
 router.post('/logout',logout);
 
 export default router;

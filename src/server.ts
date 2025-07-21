@@ -1,10 +1,7 @@
 import express from 'express';
 import cors from 'cors';
-// import * as dotenv from 'dotenv';
 import passport from 'passport';
 import cookieParser from 'cookie-parser';
-
-// dotenv.config();
 
 import connectDB from './config/db.js';
 import './config/passport.js';

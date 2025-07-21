@@ -1,10 +1,7 @@
-// src/middleware/auth.middleware.ts
-
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import User, { IUser } from '../models/user.model.js';
 
-// Define the structure of the JWT payload
 interface JwtPayload {
   id: string;
 }
@@ -27,7 +24,6 @@ export const isAuthenticated = async (req: Request, res: Response, next: NextFun
     try {
       token = req.cookies.jwt;
 
-      // Verify the token
       const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as JwtPayload;
 
       // Find the user by the ID from the token payload and attach to the request
@@ -38,11 +34,10 @@ export const isAuthenticated = async (req: Request, res: Response, next: NextFun
         // This case handles if a user was deleted but their token is still valid
         return res.status(401).json({ message: 'User not found' });
       }
-
       // Attach the user object to the request
       req.user = user;
 
-      next(); // Proceed to the next middleware or route handler
+      next(); 
     } catch (error) {
       console.error('Token verification failed:', error);
       return res.status(401).json({ message: 'Not authorized, token failed' });
