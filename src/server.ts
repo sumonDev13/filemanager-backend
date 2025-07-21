@@ -1,18 +1,14 @@
-// src/server.ts
-
 import express from 'express';
 import cors from 'cors';
-import * as dotenv from 'dotenv';
+// import * as dotenv from 'dotenv';
 import passport from 'passport';
-import cookieParser from 'cookie-parser'; // <--- 1. IMPORT COOKIE-PARSER
+import cookieParser from 'cookie-parser';
 
-// Load environment variables
-dotenv.config();
+// dotenv.config();
 
-// Import configurations and routes
 import connectDB from './config/db.js';
-import './config/passport.js'; // This initializes passport strategies
-import authRouter from './routes/auth.routes.js'; // Renamed to authRouter for clarity
+import './config/passport.js';
+import authRouter from './routes/auth.routes.js'; 
 
 // Connect to Database
 connectDB();
@@ -21,19 +17,18 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: process.env.CLIENT_URL, // e.g., 'http://localhost:3000'
+  origin: process.env.CLIENT_URL,
   credentials: true,
 }));
 
 app.use(express.json());
-app.use(cookieParser()); // <--- 2. USE COOKIE-PARSER MIDDLEWARE (CRUCIAL)
+app.use(cookieParser()); 
 
 app.use(passport.initialize());
 
 // API Routes
 app.use('/api/auth', authRouter);
 
-// <--- 3. REMOVED THE REDUNDANT /auth/callback route, it's handled by the router now
 
 const PORT = process.env.PORT || 8000;
 
