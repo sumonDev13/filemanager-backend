@@ -1,21 +1,28 @@
-import { Schema, model, Document, Types } from 'mongoose';
+import { Schema, model, Document } from 'mongoose';
 
 export interface IFile extends Document {
   name: string;
-  path: string;
-  mimetype: string;
+  url: string;
   size: number;
-  owner: Types.ObjectId;
-  parentFolder?: Types.ObjectId;
+  type: string;
+  folder: Schema.Types.ObjectId;
+  owner: Schema.Types.ObjectId;
+  parentFolder?: Schema.Types.ObjectId;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
-const fileSchema = new Schema<IFile>({
-  name: { type: String, required: true },
-  path: { type: String, required: true },
-  mimetype: { type: String, required: true },
-  size: { type: Number, required: true },
-  owner: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-  parentFolder: { type: Schema.Types.ObjectId, ref: 'Folder', default: null },
-}, { timestamps: true });
+const FileSchema = new Schema<IFile>(
+  {
+    name: { type: String, required: true },
+    url: { type: String, required: true },
+    size: { type: Number, required: true },
+    type: { type: String, required: true },
+    folder: { type: Schema.Types.ObjectId, ref: 'Folder', required: true },
+    owner: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+    parentFolder: { type: Schema.Types.ObjectId, ref: 'Folder' },
+  },
+  { timestamps: true }
+);
 
-export default model<IFile>('File', fileSchema);
+export default model<IFile>('File', FileSchema);
